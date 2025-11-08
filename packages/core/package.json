@@ -1,0 +1,18 @@
+{
+  "name": "@nextcraft/core",
+  "version": "0.1.0",
+  "description": "Core utilities and types for NextCraft",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "clean": "rm -rf dist"
+  },
+  "keywords": ["nextjs", "core", "utilities"],
+  "author": "NextCraft Team",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  }
+}

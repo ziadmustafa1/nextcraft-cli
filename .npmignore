@@ -1,0 +1,46 @@
+# Development files
+*.log
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+__tests__/
+coverage/
+
+# Source files (publish dist only)
+src/
+tsconfig.json
+.eslintrc.json
+
+# Build artifacts
+.turbo/
+.next/
+out/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Documentation (keep README)
+docs/
+CONTRIBUTING.md
+PROJECT_SUMMARY.md
+QUICK_START.md
+
+# Git
+.git/
+.gitignore
+
+# Node
+node_modules/
+
+# Misc
+.DS_Store
+Thumbs.db

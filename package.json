@@ -1,0 +1,41 @@
+{
+  "name": "nextcraft",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Smart Next.js project generator with CLI and templates",
+  "keywords": [
+    "nextjs",
+    "cli",
+    "generator",
+    "template",
+    "fullstack"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nextcraft/nextcraft"
+  },
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "prettier": "^3.1.0",
+    "turbo": "^1.11.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.0"
+}

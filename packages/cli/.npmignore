@@ -1,0 +1,17 @@
+# Source files (publish dist only)
+src/
+tsconfig.json
+.eslintrc.json
+
+# Tests
+*.test.ts
+*.spec.ts
+__tests__/
+coverage/
+
+# Development
+*.log
+.turbo/
+
+# Node
+node_modules/
