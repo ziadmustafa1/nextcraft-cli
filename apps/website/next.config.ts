@@ -31,7 +31,7 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: false
   },
   
-  // Headers for security
+  // Headers for security and Replit compatibility
   async headers() {
     return [
       {
@@ -48,6 +48,10 @@ const nextConfig: NextConfig = {
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff'
+          },
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, no-store, must-revalidate'
           }
         ]
       }
