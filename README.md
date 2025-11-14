@@ -55,19 +55,41 @@
 
 ## 📦 Quick Start
 
+### Create Your First Project
+
 ```bash
-# Create new project
+# Interactive mode (recommended for first time)
 npx create-nextcraft-app my-app
 
-# Add authentication module
-cd my-app
-forge add auth
+# Non-interactive with defaults
+npx create-nextcraft-app my-app --yes
 
-# Start development
+# Specify mode and UI framework
+npx create-nextcraft-app my-app --mode frontend --ui shadcn
+
+# Fullstack with database
+npx create-nextcraft-app my-app --mode fullstack --db postgres --auth
+```
+
+### Project Management with Forge
+
+```bash
+cd my-app
+
+# Start development server
 forge dev
 
-# Deploy
-forge deploy
+# Build for production
+forge build
+
+# Check project health
+forge doctor
+
+# Add modules (coming soon)
+forge add auth      # Authentication
+forge add users     # User management
+forge add blog      # Blog system
+forge add admin     # Admin dashboard
 ```
 
 ## 🎯 Modes
@@ -147,17 +169,54 @@ Every project comes with:
 ## 🛠️ Development
 
 ```bash
+# Clone the repository
+git clone https://github.com/nextcraft/nextcraft.git
+cd nextcraft
+
 # Install dependencies
 pnpm install
 
 # Build all packages
 pnpm build
 
+# Test the CLI locally
+cd packages/cli
+pnpm build
+node dist/index.js test-project --yes
+
 # Run tests
 pnpm test
 
 # Lint code
 pnpm lint
+```
+
+## 🧪 CLI Options
+
+### Create Command
+
+```bash
+create-nextcraft-app [project-name] [options]
+
+Options:
+  -m, --mode <mode>         Project mode (frontend|fullstack)
+  --ui <framework>          UI framework (shadcn|chakra|material)
+  --db <database>           Database (postgres|sqlite|mysql)
+  --auth                    Include authentication
+  --rtl                     Enable RTL support
+  --no-seo                  Disable SEO optimization
+  -y, --yes                 Use default options (non-interactive)
+  -V, --version             Output version number
+  -h, --help                Display help
+```
+
+### Forge Commands
+
+```bash
+forge dev                   # Start development server
+forge build                 # Build for production
+forge doctor                # Validate project structure
+forge add <module>          # Add module to project
 ```
 
 ---
