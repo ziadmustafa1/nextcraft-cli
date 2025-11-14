@@ -1,0 +1,282 @@
+# PR: NextCraft — Modes, Config, Validators, and Frontend Generator (MCP-aware)
+
+## الهدف
+
+تأسيس مولّد ذكي لمشاريع Next.js.
+فصل واضح بين Frontend و Fullstack.
+تهيئة جاهزة قابلة للتوسعة.
+دمج سير عمل MCP لتقليل الأخطاء.
+
+## نطاق التغيير
+
+* CLI أولي لإنشاء مشاريع
+* نظام أوضاع: Frontend | Fullstack
+* توليد ملف إعداد موحّد `nextcraft.config.ts`
+* مولدات: base | frontend | fullstack (واجهات فقط في هذه الدفعة)
+* Validator طبيب مشروع `forge doctor`
+* تكامل مبدئي مع تدفقات MCP داخل التصميم
+
+## لماذا
+
+* تقليل وقت التأسيس
+* منع أخطاء Client/Server المبكرة
+* جاهزية إنتاجية منذ البداية
+* قابلية توسعة بوحدات جاهزة
+
+---
+
+## ما أُنجز
+
+### 1) Modes System
+
+* واجهة تفاعلية للاختيار بين Frontend و Fullstack
+* إخفاء اختيارات DB تلقائياً عند Frontend
+* نقاط قرار بسيطة وواضحة
+
+**ملفات**
+
+* `packages/cli/src/prompts.ts`
+* `packages/cli/src/index.ts`
+
+### 2) Config Generator
+
+* توليد `nextcraft.config.ts` بالقيم المختارة
+* تعليقات توضّح كل خيار
+* قابل للتوسعة بدون كسر واجهة الاستخدام
+
+**ملفات**
+
+* `packages/cli/src/generators/config-generator.ts`
+* `packages/core/src/config/define-config.ts`
+
+### 3) Generators
+
+* `base-generator` ينشئ الهيكل الأساسي والاعتمادات العامة
+* `frontend-generator` يضيف صفحات، مكونات، تهيئة UI، وSEO أساسي
+* نقاط ربط لاحقة لـ `fullstack-generator` (مضافة بهيكل أولي دون تمكين)
+
+**ملفات**
+
+* `packages/cli/src/generators/base-generator.ts`
+* `packages/cli/src/generators/frontend-generator.ts`
+* `packages/cli/src/generators/fullstack-generator.ts` (قيد الإكمال)
+* قوالب تحت `packages/cli/templates/**`
+
+### 4) Project Doctor
+
+* فحص الملفات الأساسية
+* اكتشاف وضع المشروع آلياً
+* تقرير واضح بالأخطاء والتحذيرات
+* كود خروج مناسب
+
+**ملفات**
+
+* `packages/cli/src/commands/doctor.ts`
+* `packages/cli/src/validators/mode-validator.ts`
+
+### 5) API Client + SWR جاهز
+
+* `lib/api-client.ts` موحّد
+* تكامل SWR افتراضي
+* توصية استخدام في الأمثلة
+
+**ملفات**
+
+* `packages/cli/templates/frontend/src/lib/api-client.ts`
+
+### 6) هيكل وثائق أولي
+
+* دليل البدء
+* مصفوفة Problem-Solution
+* مخطط خارطة الطريق
+
+**ملفات**
+
+* `docs/getting-started.md`
+* `docs/problem-solution-matrix.md`
+* `docs/roadmap.md`
+
+---
+
+## ما لم يُنجز بعد (سيتم في دفعات لاحقة)
+
+* تمكين `fullstack-generator` كاملاً
+* Auth Module (Auth.js + Prisma)
+* Users/Blog Modules
+* SEO Module متكامل (sitemap, robots, OG)
+* RTL Utilities تلقائية
+* أوامر `forge add <module>` و `forge ui add <component>`
+* تكامل next-devtools MCP فعلي للتشغيل والتحليل الحي
+* Security checks عبر MCP للأعتمادات
+
+---
+
+## التصميم المعماري
+
+```
+nextcraft/
+├─ packages/
+│  ├─ cli/              # CLI + generators + commands
+│  ├─ core/             # config, types, utils, fs ops abstraction
+│  └─ modules/          # modules registry (قادم)
+├─ apps/
+│  ├─ example-frontend/ # نواتج اختبار التوليد
+│  └─ example-fullstack/# placeholder للاختبار القادم
+└─ docs/
+```
+
+* فصل concerns: CLI ←→ Core ←→ Templates
+* واجهة إعداد مركزية: `nextcraft.config.ts`
+* قابلية إدراج MCP في طبقة CLI دون التأثير على القوالب
+
+---
+
+## تدفق MCP المقترح داخل الأدوات
+
+* filesystem MCP: إنشاء/تعديل الملفات أثناء الجيل الآلي
+* eslint MCP: فحص الكود المولّد قبل الحفظ
+* refactor MCP: تحسين الكود بعد الإدراج
+* next-devtools MCP: تشغيل dev/build وقراءة السجلات
+* security MCP: فحص التبعيات والبيئة قبل الإضافة
+
+> التوصيل الفعلي سيُفعّل مع Features القادمة، والتصميم الحالي مهيأ لذلك.
+
+---
+
+## أوامر CLI الحالية
+
+```bash
+# إنشاء مشروع
+npx create-nextcraft-app my-app
+
+# فحص الصحة
+forge doctor
+```
+
+**تدفق التوليد**
+
+```
+createProjectStructure
+generateConfigFiles
+generateNextCraftConfig
+setupBaseDependencies
+setupUI
+setupSEO
+installDependencies
+initGit
+validateProject
+printSuccess
+```
+
+---
+
+## حالات الاستخدام المجرّبة
+
+### إنشاء Frontend
+
+* إنشاء بنجاح
+* ملفات أساسية في أماكنها
+* تقرير doctor: All checks passed
+
+### سيناريو فشل متعمد
+
+* حذف `src/app/page.tsx`
+* `forge doctor` يعرض خطأ واضح ويقترح الإجراء
+
+---
+
+## تأثيرات على المستخدمين
+
+* لا كسر لتجارب قائمة
+* لا تغييرات على واجهات عامة بعد
+* أول واجهة استخدام مستقرة لبدء المشاريع
+
+---
+
+## مخاطر
+
+* مخاطر توسع القوالب إن لم تُنظَّم
+* الحاجة إلى اختبارات تكاملية للـ generators
+* إدارة الاختلاف بين Frontend و Fullstack في التحديثات
+
+**الحد من المخاطر**
+
+* abstraction في `core`
+* قوالب معيارية صغيرة
+* Doctor صارم
+* CI لاحقاً قبل النشر
+
+---
+
+## اختبارات
+
+* توليد Frontend على بيئة نظيفة
+* تشغيل `forge doctor`
+* فحص TypeScript و ESLint محلياً
+* وقت التنفيذ مقبول
+
+> سيتم إضافة Vitest/Playwright في دفعة الاختبارات.
+
+---
+
+## كيف تراجع هذا الـ PR
+
+* راجع البنية في `packages/cli/src/generators/**`
+* جرّب محلياً:
+
+  ```bash
+  pnpm install
+  pnpm -w build
+  node packages/cli/dist/index.js my-app
+  cd my-app && pnpm install && pnpm dev
+  forge doctor
+  ```
+* قيم وضوح تقارير doctor
+* اقترح تحذيرات إضافية إن لزم
+
+---
+
+## قائمة فحص الدمج
+
+* [ ] كود نظيف ومقروء
+* [ ] لا تغييرات كاسرة
+* [ ] وثائق محدثة
+* [ ] أمثلة توليد ناجحة
+* [ ] خطة تفعيل MCP محددة
+
+---
+
+## متابعة
+
+**Feature 2: UI Framework Integration**
+
+* Theme system
+* Tailwind config مرتبط بـ `nextcraft.config.ts`
+* `forge ui add <component>`
+* إعداد اختبارات UI
+* ربط next-devtools MCP للتشغيل الحي
+
+**Feature 3: Component Validation**
+
+* قواعد ESLint للكشف عن خلط Client/Server
+* إصلاح تلقائي عبر refactor MCP
+* اختبارات تغطي RSC و Client Components
+
+**Feature 4–7**
+
+* Modules (Auth, Users, Blog)
+* Security + Quality layer
+* SEO + RTL
+* Deploy command
+
+---
+
+## أسئلة مفتوحة
+
+* هل تريد تمكين Fullstack بالكامل في الدفعة القادمة أم البدء بالـ UI/SEO أولاً
+* ما أول Module ذو أولوية لديك
+* ما نظام الاختبار الذي تفضله لبدء CI
+
+---
+
+**جاهز للمراجعة والدمج**
