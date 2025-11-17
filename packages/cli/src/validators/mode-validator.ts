@@ -7,6 +7,7 @@ export interface ValidationResult {
   errors: string[];
   warnings: string[];
   mode: 'frontend' | 'fullstack' | 'unknown';
+  name: string;
 }
 
 /**
@@ -25,6 +26,7 @@ export class ModeValidator {
       errors: [],
       warnings: [],
       mode: 'unknown',
+      name: 'production', // Default value
     };
 
     // Detect mode
@@ -168,6 +170,7 @@ export class ModeValidator {
     logger.title('📋 Mode Validation Report');
     
     logger.info(`Detected Mode: ${result.mode.toUpperCase()}`);
+    logger.info(`Project Name: ${result.name}`);
     logger.newLine();
 
     if (result.errors.length === 0 && result.warnings.length === 0) {
