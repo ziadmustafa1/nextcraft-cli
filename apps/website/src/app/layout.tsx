@@ -7,13 +7,13 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
-    default: 'nextcraft-website',
-    template: `%s | nextcraft-website`,
+    default: 'website',
+    template: `%s | website`,
   },
   description: 'Built with NextCraft',
   keywords: ['Next.js', 'React', 'TypeScript'],
-  authors: [{ name: 'nextcraft-website' }],
-  creator: 'nextcraft-website',
+  authors: [{ name: 'website' }],
+  creator: 'website',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.name,
     description: siteConfig.description,
-    creator: '@nextcraft-website',
+    creator: '@website',
   },
 }
 
@@ -36,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" dir="rtl">
       <body className={inter.className}>{children}</body>
     </html>
   )

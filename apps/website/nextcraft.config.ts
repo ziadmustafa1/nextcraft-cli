@@ -14,13 +14,13 @@ const nextcraftConfig = {
   ui: 'shadcn',
 
   // Database provider (fullstack only)
-  db: 'sqlite',
+  db: 'postgres',
 
   // Enable authentication with Auth.js
   auth: false,
 
   // Enable Right-to-Left (RTL) support for Arabic/Hebrew
-  rtl: false,
+  rtl: true,
 
   // Enable SEO optimization (meta tags, sitemap, etc.)
   seo: true,

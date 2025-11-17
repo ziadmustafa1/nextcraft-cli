@@ -158,7 +158,7 @@ const nextConfig: NextConfig = {
   // Enable React Strict Mode for better development experience
   reactStrictMode: true,
   
-  ${this.options.rtl ? "  // RTL Support\n  dir: 'rtl',\n  \n" : ''}// Next.js 16 - Cache Components (Partial Prerendering)
+  // Next.js 16 - Cache Components (enables Partial Prerendering)
   cacheComponents: true,
   
   // Image Optimization

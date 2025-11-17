@@ -1,11 +1,11 @@
 export const siteConfig = {
-  name: 'nextcraft-website',
+  name: 'website',
   description: 'Built with NextCraft',
-  url: 'https://nextcraft-website.com',
-  ogImage: 'https://nextcraft-website.com/og.jpg',
+  url: 'https://website.com',
+  ogImage: 'https://website.com/og.jpg',
   links: {
-    twitter: 'https://twitter.com/nextcraft-website',
-    github: 'https://github.com/nextcraft-website',
+    twitter: 'https://twitter.com/website',
+    github: 'https://github.com/website',
   },
 }
 

@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   // Enable React Strict Mode for better development experience
   reactStrictMode: true,
   
-  // Next.js 16 - Cache Components (Partial Prerendering)
+  // Next.js 16 - Cache Components (enables Partial Prerendering)
   cacheComponents: true,
   
   // Image Optimization
@@ -31,7 +31,7 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: false
   },
   
-  // Headers for security and Replit compatibility
+  // Headers for security
   async headers() {
     return [
       {
@@ -42,12 +42,12 @@ const nextConfig: NextConfig = {
             value: 'on'
           },
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN'
           },
           {
-            key: 'Cache-Control',
-            value: 'no-cache, no-store, must-revalidate'
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
           }
         ]
       }

@@ -1,22 +1,48 @@
 {
-  "name": "create-nextcraft-app",
-  "version": "0.1.0",
+  "name": "nextcraft-cli",
+  "version": "0.1.4",
   "description": "CLI tool for creating NextCraft projects",
   "main": "dist/index.js",
   "bin": {
-    "create-nextcraft-app": "./dist/index.js",
-    "forge": "./dist/forge.js"
+    "nextcraft": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "templates",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "dev": "tsc --watch",
-    "build": "tsc",
+    "build": "tsc && chmod +x dist/index.js dist/forge.js",
     "clean": "rm -rf dist",
     "lint": "eslint src --ext .ts",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "pnpm build",
+    "prepare-publish": "bash scripts/prepare-publish.sh",
+    "local-test": "npm link"
   },
-  "keywords": ["nextjs", "cli", "generator"],
+  "keywords": [
+    "nextjs",
+    "cli",
+    "generator",
+    "create-app",
+    "scaffold",
+    "template",
+    "fullstack"
+  ],
   "author": "NextCraft Team",
   "license": "MIT",
+  "homepage": "https://github.com/ziadmustafa1/NextCraft#readme",
+  "bugs": {
+    "url": "https://github.com/ziadmustafa1/NextCraft/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ziadmustafa1/NextCraft.git"
+  },
   "dependencies": {
     "chalk": "^5.3.0",
     "commander": "^11.1.0",
