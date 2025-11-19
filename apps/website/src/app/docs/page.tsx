@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { DocsLayout } from '@/components/docs-layout'
-import { ArrowRight, Terminal, Zap, Shield, Database, Palette } from 'lucide-react'
+import { ArrowRight, Terminal, Shield, Database, Palette } from 'lucide-react'
 
 export default function DocsPage() {
   return (
