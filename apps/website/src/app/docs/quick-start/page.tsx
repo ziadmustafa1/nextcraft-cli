@@ -1,95 +1,87 @@
+import { DocsLayout } from '@/components/docs-layout'
 import Link from 'next/link'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { CodeBlock } from '@/components/code-block'
 
 export default function QuickStartPage() {
+  const toc = (
+    <ul className="space-y-2 text-sm text-muted-foreground">
+      <li><a href="#create-project" className="hover:text-foreground transition-colors">Create Project</a></li>
+      <li><a href="#development" className="hover:text-foreground transition-colors">Development</a></li>
+      <li><a href="#project-structure" className="hover:text-foreground transition-colors">Project Structure</a></li>
+    </ul>
+  )
+
   return (
-    <div className="min-h-screen">
-      <div className="border-b">
-        <div className="container mx-auto px-4 py-4">
-          <Link href="/" className="text-2xl font-bold">NextCraft</Link>
-        </div>
+    <DocsLayout toc={toc}>
+      <div className="space-y-2">
+        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">Quick Start</h1>
+        <p className="text-lg text-muted-foreground">
+          Create your first production-ready application in less than a minute.
+        </p>
       </div>
-      
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid gap-8 lg:grid-cols-[250px_1fr]">
-          <aside className="space-y-6">
-            <div>
-              <h3 className="font-semibold mb-2">Getting Started</h3>
-              <ul className="space-y-1 text-sm">
-                <li><Link href="/docs/installation" className="text-muted-foreground hover:text-foreground">Installation</Link></li>
-                <li><Link href="/docs/quick-start" className="font-semibold">Quick Start</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold mb-2">Features</h3>
-              <ul className="space-y-1 text-sm">
-                <li><Link href="/docs/ui-frameworks" className="text-muted-foreground hover:text-foreground">UI Frameworks</Link></li>
-                <li><Link href="/docs/database" className="text-muted-foreground hover:text-foreground">Database</Link></li>
-                <li><Link href="/docs/authentication" className="text-muted-foreground hover:text-foreground">Authentication</Link></li>
-              </ul>
-            </div>
-          </aside>
-          
-          <main className="prose prose-slate max-w-none">
-            <h1>Quick Start</h1>
-            
-            <h2>Create Your First Project</h2>
-            
-            <p>Run the CLI and follow the interactive prompts:</p>
-            
-            <pre className="bg-muted p-4 rounded"><code>npx nextcraft-cli my-app</code></pre>
-            
-            <p>You'll be asked:</p>
-            
-            <ol>
-              <li><strong>Project mode</strong>: frontend or fullstack</li>
-              <li><strong>UI framework</strong>: shadcn, chakra, or material</li>
-              <li><strong>Database</strong>: postgres, mysql, or sqlite (fullstack only)</li>
-              <li><strong>Authentication</strong>: yes or no</li>
-              <li><strong>RTL support</strong>: yes or no</li>
-              <li><strong>SEO optimization</strong>: yes or no</li>
-            </ol>
-            
-            <h2>Non-Interactive Mode</h2>
-            
-            <p>Skip prompts with command-line options:</p>
-            
-            <pre className="bg-muted p-4 rounded"><code>npx nextcraft-cli my-app --mode frontend --ui shadcn -y</code></pre>
-            
-            <h2>Start Development</h2>
-            
-            <pre className="bg-muted p-4 rounded"><code>{`cd my-app
-npm run dev`}</code></pre>
-            
-            <p>Open <a href="http://localhost:3000">http://localhost:3000</a></p>
-            
-            <h2>Project Structure</h2>
-            
-            <pre className="bg-muted p-4 rounded text-sm"><code>{`my-app/
+
+      <div className="mt-10">
+        <h2 id="create-project" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0">1. Create Project</h2>
+        <p className="leading-7 mt-6">
+          Run the creation command and follow the interactive prompts:
+        </p>
+
+        <CodeBlock code="npx nextcraft-cli my-awesome-app" language="bash" />
+
+        <p className="leading-7">
+          You will be asked to choose:
+        </p>
+        <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
+          <li><strong>Mode:</strong> Frontend-only or Fullstack</li>
+          <li><strong>UI Framework:</strong> Shadcn, Chakra, or Material UI</li>
+          <li><strong>Database:</strong> PostgreSQL, MySQL, or SQLite (Fullstack only)</li>
+          <li><strong>Authentication:</strong> Yes/No (Fullstack only)</li>
+        </ul>
+      </div>
+
+      <div className="mt-10">
+        <h2 id="development" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">2. Start Development</h2>
+        <p className="leading-7 mt-6">
+          Navigate to your project folder and start the development server:
+        </p>
+
+        <CodeBlock code={`cd my-awesome-app\npnpm dev`} language="bash" />
+
+        <p className="leading-7">
+          Your app is now running at <code className="text-sm font-semibold">http://localhost:3000</code>.
+        </p>
+      </div>
+
+      <div className="mt-10">
+        <h2 id="project-structure" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">3. Project Structure</h2>
+        <p className="leading-7 mt-6">
+          NextCraft generates a clean, opinionated structure optimized for scale:
+        </p>
+
+        <CodeBlock code={`my-awesome-app/
 ├── src/
-│   ├── app/
-│   │   ├── layout.tsx
-│   │   ├── page.tsx
-│   │   └── actions/
-│   ├── components/
-│   │   └── ui/
-│   ├── lib/
-│   └── hooks/
-├── public/
-├── package.json
-├── next.config.ts
-└── tailwind.config.js`}</code></pre>
-            
-            <h2>Next Steps</h2>
-            
-            <ul>
-              <li><Link href="/docs/ui-frameworks">Explore UI Frameworks</Link></li>
-              <li><Link href="/docs/database">Setup Database</Link></li>
-              <li><Link href="/docs/authentication">Add Authentication</Link></li>
-            </ul>
-          </main>
-        </div>
+│   ├── app/              # Next.js App Router
+│   ├── components/       # React components
+│   ├── lib/              # Utilities & helpers
+│   ├── hooks/            # Custom React hooks
+│   └── types/            # TypeScript definitions
+├── public/               # Static assets
+├── prisma/               # Database schema (Fullstack)
+├── next.config.ts        # Next.js configuration
+└── package.json          # Dependencies`} language="text" />
       </div>
-    </div>
+
+      <div className="mt-12 flex items-center justify-between border-t pt-6">
+        <Link href="/docs/installation" className="group flex items-center gap-2 text-sm font-medium hover:text-primary">
+          <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+          Back: Installation
+        </Link>
+        <Link href="/docs/cli" className="group flex items-center gap-2 text-sm font-medium hover:text-primary">
+          Next: CLI Reference
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+      </div>
+    </DocsLayout>
   )
 }

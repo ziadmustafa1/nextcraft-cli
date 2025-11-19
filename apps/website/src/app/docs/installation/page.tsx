@@ -1,82 +1,66 @@
+import { DocsLayout } from '@/components/docs-layout'
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
+import { CodeBlock } from '@/components/code-block'
 
 export default function InstallationPage() {
-  return (
-    <div className="min-h-screen">
-      <div className="border-b">
-        <div className="container mx-auto px-4 py-4">
-          <Link href="/" className="text-2xl font-bold">NextCraft</Link>
-        </div>
-      </div>
-      
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid gap-8 lg:grid-cols-[250px_1fr]">
-          <aside className="space-y-6">
-            <div>
-              <h3 className="font-semibold mb-2">Getting Started</h3>
-              <ul className="space-y-1 text-sm">
-                <li><Link href="/docs/installation" className="font-semibold">Installation</Link></li>
-                <li><Link href="/docs/quick-start" className="text-muted-foreground hover:text-foreground">Quick Start</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold mb-2">Features</h3>
-              <ul className="space-y-1 text-sm">
-                <li><Link href="/docs/ui-frameworks" className="text-muted-foreground hover:text-foreground">UI Frameworks</Link></li>
-                <li><Link href="/docs/database" className="text-muted-foreground hover:text-foreground">Database</Link></li>
-                <li><Link href="/docs/authentication" className="text-muted-foreground hover:text-foreground">Authentication</Link></li>
-              </ul>
-            </div>
-          </aside>
-          
-          <main className="prose prose-slate max-w-none">
-            <h1>Installation</h1>
-            
-            <h2>Requirements</h2>
-            
-            <ul>
-              <li>Node.js 18.0.0 or higher</li>
-              <li>npm, pnpm, or yarn</li>
-            </ul>
-            
-            <h2>Using npx (Recommended)</h2>
-            
-            <p>No installation required. Run directly:</p>
-            
-            <pre className="bg-muted p-4 rounded"><code>npx nextcraft-cli my-app</code></pre>
-            
-            <h2>Global Installation</h2>
-            
-            <p>Install globally to use the <code>nextcraft</code> command:</p>
-            
-            <pre className="bg-muted p-4 rounded"><code>npm install -g nextcraft-cli</code></pre>
-            
-            <p>Then create projects:</p>
-            
-            <pre className="bg-muted p-4 rounded"><code>nextcraft my-app</code></pre>
-            
-            <h2>Options</h2>
-            
-            <pre className="bg-muted p-4 rounded text-sm"><code>{`nextcraft [project-name] [options]
+  const toc = (
+    <ul className="space-y-2 text-sm text-muted-foreground">
+      <li><a href="#requirements" className="hover:text-foreground transition-colors">Requirements</a></li>
+      <li><a href="#using-npx" className="hover:text-foreground transition-colors">Using npx</a></li>
+      <li><a href="#global-install" className="hover:text-foreground transition-colors">Global Installation</a></li>
+    </ul>
+  )
 
-Options:
-  -m, --mode <mode>        Project mode (frontend|fullstack)
-  --ui <framework>         UI framework (shadcn|chakra|material)
-  --db <database>          Database (postgres|sqlite|mysql)
-  --auth                   Include authentication
-  --rtl                    Enable RTL support
-  --no-seo                 Disable SEO optimization
-  -y, --yes                Use default options
-  -V, --version            Show version
-  -h, --help               Show help`}</code></pre>
-            
-            <h2>Next Steps</h2>
-            
-            <p>Continue to <Link href="/docs/quick-start">Quick Start</Link> to create your first project.</p>
-          </main>
-        </div>
+  return (
+    <DocsLayout toc={toc}>
+      <div className="space-y-2">
+        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">Installation</h1>
+        <p className="text-lg text-muted-foreground">
+          Get up and running with NextCraft in seconds.
+        </p>
       </div>
-    </div>
+
+      <div className="mt-10">
+        <h2 id="requirements" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0">Requirements</h2>
+        <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
+          <li>Node.js 18.0.0 or higher</li>
+          <li>npm, pnpm, or yarn package manager</li>
+          <li>Git (optional, for version control)</li>
+        </ul>
+      </div>
+
+      <div className="mt-10">
+        <h2 id="using-npx" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">Using npx (Recommended)</h2>
+        <p className="leading-7 mt-6">
+          The easiest way to start is using <code>npx</code>. This ensures you always use the latest version of the generator without installing anything globally.
+        </p>
+
+        <CodeBlock code="npx nextcraft-cli my-app" language="bash" />
+      </div>
+
+      <div className="mt-10">
+        <h2 id="global-install" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">Global Installation</h2>
+        <p className="leading-7 mt-6">
+          If you create projects frequently, you might prefer installing the CLI globally.
+        </p>
+
+        <CodeBlock code="npm install -g nextcraft-cli" language="bash" />
+
+        <p className="leading-7">
+          Once installed, you can use the <code>nextcraft</code> command directly:
+        </p>
+
+        <CodeBlock code="nextcraft my-app" language="bash" />
+      </div>
+
+      <div className="mt-12 flex items-center justify-between border-t pt-6">
+        <div />
+        <Link href="/docs/quick-start" className="group flex items-center gap-2 text-sm font-medium hover:text-primary">
+          Next: Quick Start
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+      </div>
+    </DocsLayout>
   )
 }

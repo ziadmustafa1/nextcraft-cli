@@ -1,120 +1,81 @@
-import Link from 'next/link'
+import { DocsLayout } from '@/components/docs-layout'
+import { CodeBlock } from '@/components/code-block'
 
-export default function UIFrameworksPage() {
+export default function UiFrameworksPage() {
+  const toc = (
+    <ul className="space-y-2 text-sm text-muted-foreground">
+      <li><a href="#shadcn-ui" className="hover:text-foreground transition-colors">Shadcn UI</a></li>
+      <li><a href="#chakra-ui" className="hover:text-foreground transition-colors">Chakra UI</a></li>
+      <li><a href="#material-ui" className="hover:text-foreground transition-colors">Material UI</a></li>
+      <li><a href="#tailwind-css" className="hover:text-foreground transition-colors">Tailwind CSS</a></li>
+    </ul>
+  )
+
   return (
-    <div className="min-h-screen">
-      <div className="border-b">
-        <div className="container mx-auto px-4 py-4">
-          <Link href="/" className="text-2xl font-bold">NextCraft</Link>
+    <DocsLayout toc={toc}>
+      <div className="space-y-2">
+        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">UI Frameworks</h1>
+        <p className="text-lg text-muted-foreground">
+          NextCraft comes with built-in support for the most popular React UI libraries.
+        </p>
+      </div>
+
+      <div className="mt-10">
+        <h2 id="shadcn-ui" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0">Shadcn UI (Default)</h2>
+        <p className="leading-7 mt-6">
+          <a href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-4">Shadcn UI</a> is the default and recommended UI library for NextCraft. It provides accessible, reusable, and composable components that you can copy and paste into your apps.
+        </p>
+
+        <CodeBlock code="npx nextcraft-cli my-app --ui shadcn" language="bash" />
+
+        <h3 className="mt-8 scroll-m-20 text-xl font-semibold tracking-tight">Features Included</h3>
+        <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
+          <li><strong>Radix UI Primitives:</strong> Accessible, unstyled components.</li>
+          <li><strong>Tailwind CSS:</strong> Utility-first styling.</li>
+          <li><strong>Dark Mode:</strong> Built-in support with <code>next-themes</code>.</li>
+          <li><strong>Icons:</strong> Lucide React icons pre-configured.</li>
+          <li><strong>Components:</strong> Button, Input, Dialog, Dropdown, and more pre-installed.</li>
+        </ul>
+      </div>
+
+      <div className="mt-10">
+        <h2 id="chakra-ui" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">Chakra UI</h2>
+        <p className="leading-7 mt-6">
+          <a href="https://chakra-ui.com" target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-4">Chakra UI</a> is a simple, modular and accessible component library that gives you the building blocks you need to build your React applications.
+        </p>
+
+        <CodeBlock code="npx nextcraft-cli my-app --ui chakra" language="bash" />
+
+        <div className="my-6 border-l-4 border-yellow-500 bg-yellow-50 p-4 dark:bg-yellow-900/20">
+          <p className="text-sm text-yellow-700 dark:text-yellow-400">
+            <strong>Note:</strong> Chakra UI uses Emotion for styling, which has some runtime performance cost compared to Tailwind CSS.
+          </p>
         </div>
       </div>
-      
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid gap-8 lg:grid-cols-[250px_1fr]">
-          <aside className="space-y-6">
-            <div>
-              <h3 className="font-semibold mb-2">Getting Started</h3>
-              <ul className="space-y-1 text-sm">
-                <li><Link href="/docs/installation" className="text-muted-foreground hover:text-foreground">Installation</Link></li>
-                <li><Link href="/docs/quick-start" className="text-muted-foreground hover:text-foreground">Quick Start</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold mb-2">Features</h3>
-              <ul className="space-y-1 text-sm">
-                <li><Link href="/docs/ui-frameworks" className="font-semibold">UI Frameworks</Link></li>
-                <li><Link href="/docs/database" className="text-muted-foreground hover:text-foreground">Database</Link></li>
-                <li><Link href="/docs/authentication" className="text-muted-foreground hover:text-foreground">Authentication</Link></li>
-              </ul>
-            </div>
-          </aside>
-          
-          <main className="prose prose-slate max-w-none">
-            <h1>UI Frameworks</h1>
-            
-            <p>NextCraft supports three popular UI frameworks. Choose based on your needs.</p>
-            
-            <h2>Shadcn UI (Recommended)</h2>
-            
-            <p>Modern, accessible components built with Radix UI and Tailwind CSS.</p>
-            
-            <pre className="bg-muted p-4 rounded"><code>npx nextcraft-cli my-app --ui shadcn</code></pre>
-            
-            <h3>Features</h3>
-            
-            <ul>
-              <li>Copy-paste components</li>
-              <li>Full customization</li>
-              <li>Accessible by default</li>
-              <li>Dark mode support</li>
-            </ul>
-            
-            <h2>Chakra UI</h2>
-            
-            <p>Simple, modular component library with great accessibility.</p>
-            
-            <pre className="bg-muted p-4 rounded"><code>npx nextcraft-cli my-app --ui chakra</code></pre>
-            
-            <h3>Features</h3>
-            
-            <ul>
-              <li>Theme customization</li>
-              <li>Responsive styles</li>
-              <li>Built-in dark mode</li>
-              <li>Composable components</li>
-            </ul>
-            
-            <h2>Material-UI</h2>
-            
-            <p>Google's Material Design implementation for React.</p>
-            
-            <pre className="bg-muted p-4 rounded"><code>npx nextcraft-cli my-app --ui material</code></pre>
-            
-            <h3>Features</h3>
-            
-            <ul>
-              <li>Material Design</li>
-              <li>Rich component library</li>
-              <li>Theming system</li>
-              <li>Enterprise ready</li>
-            </ul>
-            
-            <h2>Comparison</h2>
-            
-            <table>
-              <thead>
-                <tr>
-                  <th>Feature</th>
-                  <th>Shadcn</th>
-                  <th>Chakra</th>
-                  <th>Material-UI</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Bundle Size</td>
-                  <td>Small</td>
-                  <td>Medium</td>
-                  <td>Large</td>
-                </tr>
-                <tr>
-                  <td>Customization</td>
-                  <td>Full</td>
-                  <td>High</td>
-                  <td>Medium</td>
-                </tr>
-                <tr>
-                  <td>Learning Curve</td>
-                  <td>Low</td>
-                  <td>Low</td>
-                  <td>Medium</td>
-                </tr>
-              </tbody>
-            </table>
-          </main>
-        </div>
+
+      <div className="mt-10">
+        <h2 id="material-ui" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">Material UI</h2>
+        <p className="leading-7 mt-6">
+          <a href="https://mui.com" target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-4">Material UI (MUI)</a> is a comprehensive library of components that features Google's Material Design.
+        </p>
+
+        <CodeBlock code="npx nextcraft-cli my-app --ui material" language="bash" />
       </div>
-    </div>
+
+      <div className="mt-10">
+        <h2 id="tailwind-css" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">Tailwind CSS</h2>
+        <p className="leading-7 mt-6">
+          All projects, regardless of the UI framework chosen, come with <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-4">Tailwind CSS v4</a> configured.
+        </p>
+
+        <p className="leading-7 mt-4">
+          We include the following plugins by default:
+        </p>
+        <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
+          <li><code>tailwindcss-animate</code>: For easy animations.</li>
+          <li><code>@tailwindcss/typography</code>: For beautiful prose styling.</li>
+        </ul>
+      </div>
+    </DocsLayout>
   )
 }

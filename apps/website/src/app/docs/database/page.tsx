@@ -1,96 +1,85 @@
-import Link from 'next/link'
+import { DocsLayout } from '@/components/docs-layout'
+import { CodeBlock } from '@/components/code-block'
 
 export default function DatabasePage() {
-  return (
-    <div className="min-h-screen">
-      <div className="border-b">
-        <div className="container mx-auto px-4 py-4">
-          <Link href="/" className="text-2xl font-bold">NextCraft</Link>
-        </div>
-      </div>
-      
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid gap-8 lg:grid-cols-[250px_1fr]">
-          <aside className="space-y-6">
-            <div>
-              <h3 className="font-semibold mb-2">Getting Started</h3>
-              <ul className="space-y-1 text-sm">
-                <li><Link href="/docs/installation" className="text-muted-foreground hover:text-foreground">Installation</Link></li>
-                <li><Link href="/docs/quick-start" className="text-muted-foreground hover:text-foreground">Quick Start</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold mb-2">Features</h3>
-              <ul className="space-y-1 text-sm">
-                <li><Link href="/docs/ui-frameworks" className="text-muted-foreground hover:text-foreground">UI Frameworks</Link></li>
-                <li><Link href="/docs/database" className="font-semibold">Database</Link></li>
-                <li><Link href="/docs/authentication" className="text-muted-foreground hover:text-foreground">Authentication</Link></li>
-              </ul>
-            </div>
-          </aside>
-          
-          <main className="prose prose-slate max-w-none">
-            <h1>Database</h1>
-            
-            <p>NextCraft fullstack mode includes Prisma ORM with your choice of database.</p>
-            
-            <h2>Supported Databases</h2>
-            
-            <h3>PostgreSQL (Recommended)</h3>
-            
-            <pre className="bg-muted p-4 rounded"><code>npx nextcraft-cli my-app --mode fullstack --db postgres</code></pre>
-            
-            <p>Best for production applications with complex queries.</p>
-            
-            <h3>MySQL</h3>
-            
-            <pre className="bg-muted p-4 rounded"><code>npx nextcraft-cli my-app --mode fullstack --db mysql</code></pre>
-            
-            <p>Popular choice with wide hosting support.</p>
-            
-            <h3>SQLite</h3>
-            
-            <pre className="bg-muted p-4 rounded"><code>npx nextcraft-cli my-app --mode fullstack --db sqlite</code></pre>
-            
-            <p>Perfect for development and small applications.</p>
-            
-            <h2>Setup</h2>
-            
-            <p>After creating your project:</p>
-            
-            <ol>
-              <li>Update <code>.env</code> with your database URL</li>
-              <li>Run migrations: <code>npx prisma migrate dev</code></li>
-              <li>Generate client: <code>npx prisma generate</code></li>
-            </ol>
-            
-            <h2>Example Schema</h2>
-            
-            <pre className="bg-muted p-4 rounded"><code>{`model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}`}</code></pre>
-            
-            <h2>Usage</h2>
-            
-            <pre className="bg-muted p-4 rounded"><code>{`import { prisma } from '@/lib/prisma'
+  const toc = (
+    <ul className="space-y-2 text-sm text-muted-foreground">
+      <li><a href="#prisma-orm" className="hover:text-foreground transition-colors">Prisma ORM</a></li>
+      <li><a href="#supported-databases" className="hover:text-foreground transition-colors">Supported Databases</a></li>
+      <li><a href="#setup" className="hover:text-foreground transition-colors">Setup & Migration</a></li>
+      <li><a href="#seeding" className="hover:text-foreground transition-colors">Seeding</a></li>
+    </ul>
+  )
 
-export async function getUsers() {
-  return await prisma.user.findMany()
-}`}</code></pre>
-            
-            <h2>Prisma Studio</h2>
-            
-            <p>View and edit your data:</p>
-            
-            <pre className="bg-muted p-4 rounded"><code>npx prisma studio</code></pre>
-          </main>
+  return (
+    <DocsLayout toc={toc}>
+      <div className="space-y-2">
+        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">Database</h1>
+        <p className="text-lg text-muted-foreground">
+          Production-ready database integration with Prisma ORM and type-safe queries.
+        </p>
+      </div>
+
+      <div className="mt-10">
+        <h2 id="prisma-orm" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0">Prisma ORM</h2>
+        <p className="leading-7 mt-6">
+          NextCraft uses <a href="https://www.prisma.io" target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-4">Prisma</a> as the default ORM. It provides:
+        </p>
+        <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
+          <li><strong>Type Safety:</strong> Auto-generated TypeScript client based on your schema.</li>
+          <li><strong>Migrations:</strong> Declarative data modeling and migration system.</li>
+          <li><strong>Studio:</strong> GUI to view and edit data in your database.</li>
+        </ul>
+      </div>
+
+      <div className="mt-10">
+        <h2 id="supported-databases" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">Supported Databases</h2>
+        <p className="leading-7 mt-6">
+          You can choose your database during project creation:
+        </p>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="rounded-lg border p-4">
+            <h3 className="font-semibold">PostgreSQL</h3>
+            <p className="text-sm text-muted-foreground mt-2">Recommended for production apps. Robust and scalable.</p>
+            <code className="mt-2 block text-xs bg-muted p-1 rounded">--db postgres</code>
+          </div>
+          <div className="rounded-lg border p-4">
+            <h3 className="font-semibold">MySQL</h3>
+            <p className="text-sm text-muted-foreground mt-2">Great for legacy compatibility and widespread hosting support.</p>
+            <code className="mt-2 block text-xs bg-muted p-1 rounded">--db mysql</code>
+          </div>
+          <div className="rounded-lg border p-4">
+            <h3 className="font-semibold">SQLite</h3>
+            <p className="text-sm text-muted-foreground mt-2">Best for prototyping and small apps. No server required.</p>
+            <code className="mt-2 block text-xs bg-muted p-1 rounded">--db sqlite</code>
+          </div>
         </div>
       </div>
-    </div>
+
+      <div className="mt-10">
+        <h2 id="setup" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">Setup & Migration</h2>
+        <p className="leading-7 mt-6">
+          After creating your project, configure your database connection in <code>.env</code>:
+        </p>
+
+        <CodeBlock code='DATABASE_URL="postgresql://user:password@localhost:5432/mydb"' language="bash" />
+
+        <p className="leading-7">
+          Then run migrations to create tables:
+        </p>
+
+        <CodeBlock code="npx prisma migrate dev" language="bash" />
+      </div>
+
+      <div className="mt-10">
+        <h2 id="seeding" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">Seeding</h2>
+        <p className="leading-7 mt-6">
+          We include a <code>prisma/seed.ts</code> file to populate your database with initial data.
+        </p>
+
+        <CodeBlock code="npx prisma db seed" language="bash" />
+      </div>
+    </DocsLayout>
   )
 }

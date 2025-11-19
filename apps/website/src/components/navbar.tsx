@@ -1,14 +1,16 @@
 import Link from 'next/link'
+import { Box } from 'lucide-react'
 
 export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="text-2xl font-bold">
-            NextCraft 🎨
+          <Link href="/" className="flex items-center gap-2 text-xl font-bold">
+            <Box className="h-6 w-6" />
+            NextCraft
           </Link>
-          
+
           <div className="flex items-center gap-6">
             <Link href="/docs" className="text-sm font-medium hover:text-primary transition-colors">
               Docs
@@ -16,8 +18,8 @@ export function Navbar() {
             <Link href="/examples" className="text-sm font-medium hover:text-primary transition-colors">
               Examples
             </Link>
-            <a 
-              href="https://github.com/ziadmustafa1/NextCraft" 
+            <a
+              href="https://github.com/ziadmustafa1/NextCraft"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm font-medium hover:text-primary transition-colors"
