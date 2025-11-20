@@ -1,6 +1,6 @@
 {
   "name": "nextcraft-cli",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "CLI tool for creating NextCraft projects",
   "main": "dist/index.js",
   "bin": {

@@ -32,13 +32,18 @@ export function DocsLayout({ children, toc }: DocsLayoutProps) {
                   </li>
                 </ul>
               </div>
-              
+
               <div>
                 <h3 className="font-semibold mb-3 text-sm uppercase tracking-wide">Features</h3>
                 <ul className="space-y-2 text-sm">
                   <li>
                     <Link href="/docs/ui-frameworks" className="block py-1 text-muted-foreground hover:text-foreground transition-colors">
                       UI Frameworks
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/docs/cli" className="block py-1 text-muted-foreground hover:text-foreground transition-colors">
+                      CLI Commands
                     </Link>
                   </li>
                   <li>
@@ -51,16 +56,22 @@ export function DocsLayout({ children, toc }: DocsLayoutProps) {
                       Authentication
                     </Link>
                   </li>
+                  <li>
+                    <Link href="/docs/resources" className="block py-1 text-muted-foreground hover:text-foreground transition-colors">
+                      CRUD Resources
+                    </Link>
+                  </li>
                 </ul>
               </div>
+
             </div>
           </aside>
-          
+
           {/* Content - Flexible */}
           <main className="flex-1 min-w-0 prose prose-slate max-w-none">
             {children}
           </main>
-          
+
           {/* Right TOC - Sticky */}
           {toc && (
             <aside className="hidden xl:block w-56 flex-shrink-0">

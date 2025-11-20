@@ -1,96 +1,65 @@
-import { DocsLayout } from '@/components/docs-layout'
-import { CodeBlock } from '@/components/code-block'
+import { DocsLayout } from "@/components/docs-layout"
+import { CodeBlock } from "@/components/code-block"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
-export default function CliPage() {
+export default function CLICommandsPage() {
     const toc = (
         <ul className="space-y-2 text-sm text-muted-foreground">
-            <li><a href="#installation" className="hover:text-foreground transition-colors">Installation</a></li>
-            <li><a href="#commands" className="hover:text-foreground transition-colors">Commands</a></li>
-            <li><a href="#options" className="hover:text-foreground transition-colors">Options</a></li>
-            <li><a href="#examples" className="hover:text-foreground transition-colors">Examples</a></li>
+            <li><a href="#add-auth" className="hover:text-foreground transition-colors">Add Authentication</a></li>
+            <li><a href="#generate-resource" className="hover:text-foreground transition-colors">Generate Resource</a></li>
         </ul>
     )
 
     return (
         <DocsLayout toc={toc}>
             <div className="space-y-2">
-                <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">CLI Reference</h1>
+                <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">CLI Commands</h1>
                 <p className="text-lg text-muted-foreground">
-                    Complete reference for the NextCraft CLI tool.
+                    Learn how to use the NextCraft CLI to speed up your development.
                 </p>
             </div>
 
             <div className="mt-10">
-                <h2 id="installation" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0">Installation</h2>
+                <h2 id="add-auth" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0">Add Authentication</h2>
                 <p className="leading-7 mt-6">
-                    You can use the CLI directly with <code>npx</code> (recommended) or install it globally.
+                    The <code>add auth</code> command sets up a complete authentication system using NextAuth.js, Prisma, and Shadcn UI.
                 </p>
-
-                <CodeBlock code="npx nextcraft-cli [project-name]" language="bash" />
+                <CodeBlock code="nextcraft add auth" language="bash" filename="Terminal" />
+                <p className="leading-7 mt-6">
+                    This command will:
+                </p>
+                <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
+                    <li>Install <code>next-auth</code>, <code>@auth/prisma-adapter</code>, and <code>bcryptjs</code>.</li>
+                    <li>Create <code>src/lib/auth.ts</code> with GitHub and Google providers.</li>
+                    <li>Create the API route at <code>src/app/api/auth/[...nextauth]/route.ts</code>.</li>
+                    <li>Update your <code>prisma/schema.prisma</code> with User, Account, and Session models.</li>
+                </ul>
             </div>
 
             <div className="mt-10">
-                <h2 id="commands" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">Commands</h2>
-
-                <div className="mt-6">
-                    <h3 className="font-semibold text-xl tracking-tight">create-nextcraft-app</h3>
-                    <p className="leading-7 mt-2">Creates a new NextCraft project with the specified name.</p>
-                    <CodeBlock code="npx nextcraft-cli my-app [options]" language="bash" />
-                </div>
+                <h2 id="generate-resource" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">Generate CRUD Resource</h2>
+                <p className="leading-7 mt-6">
+                    The <code>generate resource</code> command scaffolds a full CRUD (Create, Read, Update, Delete) feature for a specific entity.
+                </p>
+                <CodeBlock code="nextcraft generate resource post" language="bash" filename="Terminal" />
+                <p className="leading-7 mt-6">
+                    This generates:
+                </p>
+                <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
+                    <li><strong>Schema:</strong> Zod validation schema in <code>src/lib/validations/post.ts</code>.</li>
+                    <li><strong>Actions:</strong> Server Actions for DB operations in <code>src/lib/actions/post.ts</code>.</li>
+                    <li><strong>Form:</strong> React Hook Form component in <code>src/components/post/post-form.tsx</code>.</li>
+                    <li><strong>Page:</strong> A main page listing items and the create form in <code>src/app/posts/page.tsx</code>.</li>
+                </ul>
             </div>
 
-            <div className="mt-10">
-                <h2 id="options" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">Options</h2>
-
-                <div className="my-6 w-full overflow-y-auto">
-                    <table className="w-full">
-                        <thead>
-                            <tr className="m-0 border-t p-0 even:bg-muted">
-                                <th className="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">Option</th>
-                                <th className="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">Description</th>
-                                <th className="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">Default</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr className="m-0 border-t p-0 even:bg-muted">
-                                <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right font-mono text-sm">--mode &lt;type&gt;</td>
-                                <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">Project mode (frontend, fullstack)</td>
-                                <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right font-mono text-sm">frontend</td>
-                            </tr>
-                            <tr className="m-0 border-t p-0 even:bg-muted">
-                                <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right font-mono text-sm">--ui &lt;lib&gt;</td>
-                                <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">UI Framework (shadcn, chakra)</td>
-                                <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right font-mono text-sm">shadcn</td>
-                            </tr>
-                            <tr className="m-0 border-t p-0 even:bg-muted">
-                                <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right font-mono text-sm">--db &lt;type&gt;</td>
-                                <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">Database (postgres, sqlite)</td>
-                                <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right font-mono text-sm">postgres</td>
-                            </tr>
-                            <tr className="m-0 border-t p-0 even:bg-muted">
-                                <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right font-mono text-sm">--auth</td>
-                                <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">Include authentication</td>
-                                <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right font-mono text-sm">false</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div className="mt-10">
-                <h2 id="examples" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight">Examples</h2>
-
-                <div className="mt-6 space-y-6">
-                    <div>
-                        <h3 className="font-semibold text-lg">Basic Frontend Project</h3>
-                        <CodeBlock code="npx nextcraft-cli my-blog --mode frontend --ui shadcn" language="bash" />
-                    </div>
-
-                    <div>
-                        <h3 className="font-semibold text-lg">Fullstack SaaS Starter</h3>
-                        <CodeBlock code="npx nextcraft-cli my-saas --mode fullstack --db postgres --auth" language="bash" />
-                    </div>
-                </div>
+            <div className="mt-12 flex items-center justify-between border-t pt-6">
+                <div />
+                <Link href="/docs/authentication" className="group flex items-center gap-2 text-sm font-medium hover:text-primary">
+                    Next: Authentication
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
             </div>
         </DocsLayout>
     )

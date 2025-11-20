@@ -62,7 +62,7 @@ program
 
       // Get project options
       let projectOptions;
-      
+
       // Non-interactive mode with --yes or all options provided via CLI
       if (options.yes || (options.mode && options.ui)) {
         projectOptions = {
@@ -94,6 +94,51 @@ program
       logger.success('🎉 Project created successfully!');
     } catch (error) {
       logger.error('Failed to create project');
+      if (error instanceof Error) {
+        logger.error(error.message);
+      }
+      process.exit(1);
+    }
+  });
+
+program
+  .command('add')
+  .description('Add a feature to your project')
+  .argument('<feature>', 'Feature to add (auth)')
+  .action(async (feature: string) => {
+    try {
+      if (feature === 'auth') {
+        const { AuthGenerator } = await import('./generators/auth-generator');
+        const generator = new AuthGenerator(process.cwd());
+        await generator.generate();
+      } else {
+        logger.error(`Unknown feature "${feature}". Supported features: auth`);
+        process.exit(1);
+      }
+    } catch (error) {
+      logger.error('Failed to add feature');
+      if (error instanceof Error) {
+        logger.error(error.message);
+      }
+      process.exit(1);
+    }
+  });
+
+
+
+program
+  .command('generate')
+  .alias('g')
+  .description('Generate a new resource')
+  .command('resource')
+  .argument('<name>', 'Name of the resource (e.g. post, product)')
+  .action(async (name: string) => {
+    try {
+      const { ResourceGenerator } = await import('./generators/resource-generator');
+      const generator = new ResourceGenerator(process.cwd(), name);
+      await generator.generate();
+    } catch (error) {
+      logger.error('Failed to generate resource');
       if (error instanceof Error) {
         logger.error(error.message);
       }

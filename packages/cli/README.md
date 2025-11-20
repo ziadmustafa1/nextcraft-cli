@@ -42,6 +42,24 @@ Options:
   -y, --yes                Use default options
   -V, --version            Show version
   -h, --help               Show help
+
+Commands:
+  add <feature>            Add a feature to your project (e.g. auth)
+  generate <type> <name>   Generate a resource (e.g. resource post)
+```
+
+## New Features (v0.2.0)
+
+### Add Authentication
+Instantly add NextAuth.js with Prisma adapter:
+```bash
+nextcraft add auth
+```
+
+### Generate CRUD Resource
+Scaffold a full CRUD feature (Schema, Actions, Form, Page):
+```bash
+nextcraft generate resource post
 ```
 
 ## Examples

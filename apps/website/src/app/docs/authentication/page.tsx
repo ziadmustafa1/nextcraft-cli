@@ -1,5 +1,7 @@
 import { DocsLayout } from '@/components/docs-layout'
 import { CodeBlock } from '@/components/code-block'
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 export default function AuthenticationPage() {
   const toc = (
@@ -23,7 +25,11 @@ export default function AuthenticationPage() {
       <div className="mt-10">
         <h2 id="overview" className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0">Overview</h2>
         <p className="leading-7 mt-6">
-          When you select the <code>--auth</code> flag, NextCraft configures a complete authentication system including:
+          You can easily add authentication to your NextCraft project using the CLI:
+        </p>
+        <CodeBlock code="nextcraft add auth" language="bash" filename="Terminal" />
+        <p className="leading-7 mt-6">
+          This command configures a complete authentication system including:
         </p>
         <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
           <li><strong>Auth.js v5 (Beta):</strong> The latest version of the standard auth library for Next.js.</li>
@@ -80,6 +86,14 @@ export default function UserProfile() {
 
   return <a href="/api/auth/signin">Sign in</a>
 }`} language="typescript" filename="components/user-profile.tsx" />
+      </div>
+
+      <div className="mt-12 flex items-center justify-between border-t pt-6">
+        <div />
+        <Link href="/docs/database" className="group flex items-center gap-2 text-sm font-medium hover:text-primary">
+          Next: Database
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Link>
       </div>
     </DocsLayout>
   )
