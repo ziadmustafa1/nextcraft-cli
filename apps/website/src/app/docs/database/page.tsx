@@ -1,5 +1,7 @@
 import { DocsLayout } from '@/components/docs-layout'
 import { CodeBlock } from '@/components/code-block'
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 export default function DatabasePage() {
   const toc = (
@@ -79,6 +81,14 @@ export default function DatabasePage() {
         </p>
 
         <CodeBlock code="npx prisma db seed" language="bash" />
+      </div>
+
+      <div className="mt-12 flex items-center justify-between border-t pt-6">
+        <div />
+        <Link href="/docs/resources" className="group flex items-center gap-2 text-sm font-medium hover:text-primary">
+          Next: CRUD Resources
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Link>
       </div>
     </DocsLayout>
   )

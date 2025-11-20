@@ -1,5 +1,7 @@
 import { DocsLayout } from '@/components/docs-layout'
 import { CodeBlock } from '@/components/code-block'
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 export default function ResourcesPage() {
     const toc = (
@@ -78,6 +80,14 @@ export default function ResourcesPage() {
                     <li>Update the <strong>Zod Schema</strong> in <code>src/lib/validations/[name].ts</code>.</li>
                     <li>Update the <strong>Form Fields</strong> in <code>src/components/[name]/[name]-form.tsx</code>.</li>
                 </ol>
+            </div>
+
+            <div className="mt-12 flex items-center justify-between border-t pt-6">
+                <div />
+                <Link href="/docs/ui-frameworks" className="group flex items-center gap-2 text-sm font-medium hover:text-primary">
+                    Next: UI Frameworks
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
             </div>
         </DocsLayout>
     )
