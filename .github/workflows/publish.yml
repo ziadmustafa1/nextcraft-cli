@@ -1,0 +1,22 @@
+            - name: NPM Publisher
+  # You may pin to the exact commit or the version.
+  # uses: lyzhang1999/npm-publish@61d419d5bb515116b1745c3da8575d37c58edff7
+  uses: lyzhang1999/npm-publish@v1.0.2
+  with:
+    # The NPM access token to use when publishing
+    token: 
+    # The NPM registry URL to use
+    registry: # optional, default is https://registry.npmjs.org/
+    # The path of your package.json file
+    package: # optional, default is package.json
+    # The tag to publish to. This allows people to install the package using "npm install <package-name>@<tag>".
+    tag: # optional, default is latest
+    # Determines whether the published package should be publicly visible, or restricted to members of your NPM organization. This only applies to scoped packages.
+    access: # optional
+    # If true, run with the --dry-run flag
+    dry-run: # optional, default is false
+    # Only publish if the version in package.json differs from the latest on NPM
+    check-version: # optional, default is true
+    # Only publish to NPM if the version number in package.json is greater than the latest on NPM
+    greater-version-only: # optional, default is false
+          
